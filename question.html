@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvre ton Agent Valorant</title>
+    <link rel="icon" type="image/png" href="logo.jpg">
+
+    <!-- Lien vers Google Fonts pour utiliser la police Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('fond.jpeg') no-repeat center center/cover;
+            background-size: cover;
+            color: rgb(255, 204, 219);
+            font-family: 'Roboto', sans-serif; /* Applique la police Roboto à tout le corps de la page */
+        }
+
+        .container {
+            padding: 40px;
+            width: 70%;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            padding-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+            transition: opacity 0.5s ease, background 0.5s ease, backdrop-filter 0.5s ease;
+        }
+
+        .container:hover {
+            background: rgba(255, 255, 255, 0);
+            backdrop-filter: none;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .question {
+            font-size: 1.2em; /* Réduit la taille de la question */
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .answer-btn {
+            background: linear-gradient(135deg, #471b1b, #702c8b);
+            color: rgb(255, 204, 219);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 80%;
+            transition: transform 0.3s ease;
+        }
+
+        .answer-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade {
+            animation: fadeIn 1s forwards;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+   
+    
+
+    <audio id="background-music" loop>
+        <source src="die.mp3" type="audio/mp3">
+        Ton navigateur ne supporte pas la lecture audio.
+    </audio>
+
+    <div class="container fade" id="quiz-container">
+        <h1>Découvre ton Agent</h1>
+        <div id="questions-container">
+            <div class="question fade" id="q1">
+                <p>1. Comment aimes-tu jouer ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(1, 'a')">J'adore foncer dans le tas et éliminer mes ennemis en premier.</button>
+                    <button class="answer-btn" onclick="nextQuestion(1, 'b')">Je préfère perturber l’ennemi et créer des opportunités pour mon équipe.</button>
+                    <button class="answer-btn" onclick="nextQuestion(1, 'c')">J’aime poser des pièges et garder le contrôle des zones.</button>
+                    <button class="answer-btn" onclick="nextQuestion(1, 'd')">Je protège et soutiens mes coéquipiers avant tout.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q2">
+                <p>2. Quel est ton rôle préféré ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(2, 'c')">Duelist – Je veux être le premier à me battre.</button>
+                    <button class="answer-btn" onclick="nextQuestion(2, 'd')">Initiator – Je prépare les engagements de mon équipe.</button>
+                    <button class="answer-btn" onclick="nextQuestion(2, 'a')">Sentinel – Je défends les sites et protège mon équipe.</button>
+                    <button class="answer-btn" onclick="nextQuestion(2, 'b')">Controller – Je manipule le terrain à mon avantage.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q3">
+                <p>3. Si tu avais un seul pouvoir en jeu, ce serait…</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(3, 'a')">Un dash ou une téléportation pour surprendre mes ennemis.</button>
+                    <button class="answer-btn" onclick="nextQuestion(3, 'd')">Une grenade ou un projectile pour faire du chaos.</button>
+                    <button class="answer-btn" onclick="nextQuestion(3, 'c')">Un piège ou une tourelle pour contrôler l’espace.</button>
+                    <button class="answer-btn" onclick="nextQuestion(3, 'b')">Un écran ou une fumée pour bloquer la vision ennemie.
+                    </button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q4">
+                <p>4. Comment joues-tu un clutch 1v3 ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(4, 'a')"> Je fonce et tente de tuer mes ennemis un par un avec mon skill brut.</button>
+                    <button class="answer-btn" onclick="nextQuestion(4, 'd')">J’utilise mes capacités pour les désorienter et créer une ouverture.</button>
+                    <button class="answer-btn" onclick="nextQuestion(4, 'c')"> Je joue intelligemment, je pose un piège et j’attends.</button>
+                    <button class="answer-btn" onclick="nextQuestion(4, 'b')">Je temporise et j’utilise des smokes pour les forcer à faire des erreurs.</button>
+                </div>
+            </div>
+            
+            <div class="question hidden" id="q5">
+                <p>5. Quelle arme préfères-tu ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(5, 'd')">Vandal – Un headshot et c’est fini !</button>
+                    <button class="answer-btn" onclick="nextQuestion(5, 'b')">Phantom – Discrétion et efficacité.</button>
+                    <button class="answer-btn" onclick="nextQuestion(5, 'c')">Operator – Je préfère éliminer à distance.</button>
+                    <button class="answer-btn" onclick="nextQuestion(5, 'a')">Sheriff – Le one-tap, c’est mon style !</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q6">
+                <p>6. Si ton équipe est en difficulté, que fais-tu ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(6,'a')">Je fonce en premier pour faire une ouverture héroïque.</button>
+                    <button class="answer-btn" onclick="nextQuestion(6,'b')">Je trouve un moyen de perturber les adversaires avec mes capacités.</button>
+                    <button class="answer-btn" onclick="nextQuestion(6,'c')">Je pose des défenses et je force l’ennemi à faire des erreurs.</button>
+                    <button class="answer-btn" onclick="nextQuestion(6,'d')">Je guide mon équipe avec des smokes et des informations précises.
+                    </button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q7">
+                <p>7. Comment tes coéquipiers te décriraient-ils ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(7,'a')">Impulsif et agressif, toujours en train de rush.</button>
+                    <button class="answer-btn" onclick="nextQuestion(7,'b')">Intelligent et imprévisible, je sais surprendre mes adversaires.</button>
+                    <button class="answer-btn" onclick="nextQuestion(7,'c')">Stratégique et patient, je joue pour la victoire.</button>
+                    <button class="answer-btn" onclick="nextQuestion(7,'d')">Protecteur et tactique, je prends soin de mon équipe.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q8">
+                <p>8. Quel pays t’attire le plus ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(8,'d')">États-Unis – Action et intensité !</button>
+                    <button class="answer-btn" onclick="nextQuestion(8,'c')">Japon – Discrétion et discipline.</button>
+                    <button class="answer-btn" onclick="nextQuestion(8,'b')">France – Élégance et précision.</button>
+                    <button class="answer-btn" onclick="nextQuestion(8,'a')">Brésil – Dynamisme et créativité.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q9">
+                <p>9. Que dirais-tu en début de round ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(9,'a')">"On les écrase, pas de quartier !"</button>
+                    <button class="answer-btn" onclick="nextQuestion(9,'c')">"Restez sur vos gardes, j’ai un plan."</button>
+                    <button class="answer-btn" onclick="nextQuestion(9,'d')">"Laissez-les venir, ils vont regretter leur choix."</button>
+                    <button class="answer-btn" onclick="nextQuestion(9,'b')">"On contrôle le terrain, on ne laisse rien passer."</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q10">
+                <p>10. Quelle est ta priorité en jeu ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(10,'a')">Gagner mes duels – Je veux être le MVP.</button>
+                    <button class="answer-btn" onclick="nextQuestion(10,'c')">Créer du chaos – Plus l’ennemi est perdu, mieux c’est.</button>
+                    <button class="answer-btn" onclick="nextQuestion(10,'d')">Gérer l’espace – J’aime contrôler les zones.</button>
+                    <button class="answer-btn" onclick="nextQuestion(10,'b')">Aider mon équipe – On gagne ensemble !</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q11">
+                <p>11. Tu préfères les capacités qui…</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(11,'b')">Infligent des dégâts et éliminent les ennemis.</button>
+                    <button class="answer-btn" onclick="nextQuestion(11,'d')">Aveuglent ou étourdissent les adversaires.</button>
+                    <button class="answer-btn" onclick="nextQuestion(11,'c')">Posent des pièges ou des défenses.</button>
+                    <button class="answer-btn" onclick="nextQuestion(11,'a')">Créent des barrières ou bloquent la vision.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q12">
+                <p>12. Ton ultime idéal serait…</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(12,'b')">Un one-shot garanti sur un ennemi.</button>
+                    <button class="answer-btn" onclick="nextQuestion(12,'a')">Une explosion qui perturbe toute l’équipe adverse.</button>
+                    <button class="answer-btn" onclick="nextQuestion(12,'c')">Une capacité défensive qui verrouille une zone.</button>
+                    <button class="answer-btn" onclick="nextQuestion(12,'d')">Un pouvoir tactique qui aide mon équipe à gagner.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q13">
+                <p>13. Si tu pouvais avoir un super-pouvoir, ce serait…</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(13,'a')">Téléportation – Être imprévisible.</button>
+                    <button class="answer-btn" onclick="nextQuestion(13,'b')">Invisibilité – Se faufiler sans être vu.</button>
+                    <button class="answer-btn" onclick="nextQuestion(13,'d')">Vision améliorée – Voir ce que les autres ne voient pas.</button>
+                    <button class="answer-btn" onclick="nextQuestion(13,'c')">Manipulation du terrain – Créer des obstacles et des protections.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q14">
+                <p>14. Quelle couleur te représente le mieux ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(14,'d')">Rouge – Puissance et agressivité.</button>
+                    <button class="answer-btn" onclick="nextQuestion(14,'b')">Bleu – Intelligence et calme.</button>
+                    <button class="answer-btn" onclick="nextQuestion(14,'c')">Noir – Discrétion et mystère.</button>
+                    <button class="answer-btn" onclick="nextQuestion(14,'a')">Vert – Stratégie et contrôle.</button>
+                </div>
+            </div>
+
+            <div class="question hidden" id="q15">
+                <p>15. Quel mot décrit le mieux ton style de jeu ?</p>
+                <div class="answers">
+                    <button class="answer-btn" onclick="nextQuestion(15,'a')">Explosif 💥</button>
+                    <button class="answer-btn" onclick="nextQuestion(15,'b')">Cerveau 🧠</button>
+                    <button class="answer-btn" onclick="nextQuestion(15,'c')">Défenseur 🛡️</button>
+                    <button class="answer-btn" onclick="nextQuestion(15,'d')">Maître du terrain 🌪️</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let scores = { a: 0, b: 0, c: 0, d: 0 };
+        const totalQuestions = 15;
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 10) + 1; // Génère un nombre entre 1 et 10
+        }
+
+        
+    function nextQuestion(questionNumber, answer) {
+        scores[answer] += getRandomNumber();
+
+        // Stocker le score dans localStorage
+        localStorage.setItem(answer, scores[answer]);
+
+        console.log(`Scores après la question ${questionNumber}:`);
+        console.log(`a: ${scores.a}, b: ${scores.b}, c: ${scores.c}, d: ${scores.d}`);
+
+        let currentQ = document.getElementById(`q${questionNumber}`);
+        currentQ.classList.add("fade-out");
+
+        setTimeout(() => {
+            currentQ.classList.add("hidden");
+            currentQ.classList.remove("fade-out");
+
+            let nextQ = document.getElementById(`q${questionNumber + 1}`);
+            if (nextQ) {
+                nextQ.classList.remove("hidden");
+                nextQ.classList.add("fade");
+                
+            } else {
+                saveResultAndRedirect();
+            }
+        }, 500);
+    }
+
+        function saveResultAndRedirect() {
+            let maxScore = Math.max(scores.a, scores.b, scores.c, scores.d);
+
+            // Stocker les scores dans localStorage
+            localStorage.setItem('a', scores.a);
+            localStorage.setItem('b', scores.b);
+            localStorage.setItem('c', scores.c);
+            localStorage.setItem('d', scores.d);
+
+            // Redirection vers la page de résultats
+            window.location.href = "Result.html";
+        }       
+
+        const audio = document.getElementById('background-music');
+
+        document.body.addEventListener('click', function() {
+        audio.play();
+        });
+    </script>
+
+
+</body>
+</html>

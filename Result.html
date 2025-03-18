@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ton Agent Valorant</title>
+    <link rel="icon" type="image/png" href="logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('fond.jpg') no-repeat center center/cover;
+            animation: fadeInBackground 1s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .container {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+            animation: fadeIn 1.5s forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background 0.5s, color 0.5s;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .result {
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-weight: 400;
+        }
+
+        .result img {
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 1.2em;
+            width: 80%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: scale(1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInBackground {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="result" id="pokemon-result"></div>
+        <button onclick="retryQuiz()">Essayer à nouveau</button>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="Victory.mp3" type="audio/mp3">
+        Ton navigateur ne supporte pas la lecture audio.
+    </audio>
+    
+    <script>
+        // Récupérer les valeurs des variables
+        let a = parseInt(localStorage.getItem('a') || '0');
+        let b = parseInt(localStorage.getItem('b') || '0');
+        let c = parseInt(localStorage.getItem('c') || '0');
+        let d = parseInt(localStorage.getItem('d') || '0');
+
+        let result;
+        let background;
+        let containerColor;
+        let textColor;
+
+        // Comparer les valeurs pour déterminer le Pokémon et le texte associé
+
+        if (a > b && b > c && c >= d) {
+            result = {
+                pokemon: "Yoru",
+                img: "yoru.png",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+        } else if (a > b && b > d && d >= c) {
+            result = {
+                pokemon: "Iso",
+                img: "iso.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+        } else if (a > c && c > b && b >= d) {
+            result = {
+                pokemon: "Reyna",
+                img: "reyna.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+        } else if (a > c && c > d && d >= b) {
+            result = {
+                pokemon: "Raze",
+                img: "raze.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+        } else if (a > d && d > b && b >= c) {
+            result = {
+                pokemon: "Phoenix",
+                text: "Rentrez chez vous !!!",
+                img: "phoenix.png",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+        } else if (a > d && d > c && c >= b) {
+            result = {
+                pokemon: "Jett",
+                img: "jett.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondduel.jpg';
+            containerColor = 'rgba(0, 0, 255, 0.3)';
+            textColor = '#f9b451';
+
+
+        } else if (b > a && a > c && c >= d) {
+            result = {
+                pokemon: "Sage",
+                img: "sage.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+        } else if (b > a && a > d && d >= c) {
+            result = {
+                pokemon: "Chamber",
+                img: "chamber.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+        } else if (b > c && c > a && a >= d) {
+            result = {
+                pokemon: "Killjoy",
+                img: "killjoy.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+        } else if (b > c && c > d && d >= a) {
+            result = {
+                pokemon: "Cypher",
+                text: "Rentrez chez vous !!!",
+                img: "cypher.png",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+        } else if (b > d && d > a && a >= c) {
+            result = {
+                pokemon: "Vyse",
+                img: "vyse.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+        } else if (b > d && d > c && c >= a) {
+            result = {
+                pokemon: "Deadlock",
+                img: "deadlock.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondsenti.jpg';
+            containerColor = 'rgba(29, 160, 100, 0.5)';
+            textColor = '#ffa129';
+
+
+
+        } else if (c > a && a > b && b >= d) {
+            result = {
+                pokemon: "Clove",
+                img: "clove.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        } else if (c > a && a > d && d >= b) {
+            result = {
+                pokemon: "Brimstone",
+                img: "brimstone.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        } else if (c > b && b > a && a >= d) {
+            result = {
+                pokemon: "Viper",
+                img: "viper.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        } else if (c > b && b > d && d >= a) {
+            result = {
+                pokemon: "Astra",
+                img: "astra.png",
+                text: "Je te touche pas avec un baton",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        } else if (c > d && d > a && a >= b) {
+            result = {
+                pokemon: "Harbor",
+                text: "Rentrez chez vous !!!",
+                img: "harbor.png",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        } else if (c > d && d > b && b >= a) {
+            result = {
+                pokemon: "Omen",
+                text: " ",
+                img: "omen.png",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondcontrol.jpg';
+            containerColor = 'rgba(122, 254, 212, 0.5)';
+            textColor = '#da2828';
+        
+
+
+        } else if (d > a && a > b && b >= c) {
+            result = {
+                pokemon: "Skye",
+                img: "skye.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+        } else if (d > a && a > c && c >= b) {
+            result = {
+                pokemon: "KAY/O",
+                img: "kayo.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+        } else if (d > b && b > a && a >= c) {
+            result = {
+                pokemon: "Gekko",
+                img: "gekko.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+        } else if (d > b && b > c && c >= a) {
+            result = {
+                pokemon: "Tejo",
+                img: "tejo.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+        } else if (d >  c && c > a && a >= b) {
+            result = {
+                pokemon: "Breach",
+                img: "breach.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+        } else if (d > c && c > b && b >= a) {
+            result = {
+                pokemon: "Sova",
+                img: "sova.png",
+                text: " ",
+                imageSize: "350px" // Taille spécifique de l'image
+            };
+            background = 'fondinit.jpeg';
+            containerColor = 'rgba(99, 51, 173, 0.3)';
+            textColor = '#dc0d14';
+
+
+        } else if (d === c && c === b) {
+            result = {
+                pokemon: "Fade",
+                img: "fade.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image,
+            };
+            background = 'fondfade.jpg';
+            containerColor = 'rgba(147, 36, 56, 0.3)';
+            textColor = '#e05c72';
+        } else if (a === c && c === d) {
+            result = {
+                pokemon: "Waylay",
+                img: "waylay.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image,
+            };
+            background = 'fondway.jpg';
+            containerColor = 'rgba(64, 153, 88, 0.3)';
+            textColor = '#a36ff9';
+        
+
+        } else if (a === b && b === c ) {
+            result = {
+                pokemon: "Neon",
+                img: "neon.png",
+                text: "SMAAASH !!!!!!!",
+                imageSize: "350px" // Taille spécifique de l'image,
+            };
+            background = 'fondneon.png';
+            containerColor = 'rgba(0, 0, 0, 0)';
+            textColor = '#b8f74b';
+        } else if (a === b && b === d) {
+            result = {
+                pokemon: "Naked Jett",
+                img: "naked.gif",
+                text: "Je t'aime. Tu es parfaite.",
+                imageSize: "300px" // Taille spécifique de l'image,
+            };
+            background = 'fondnaked.jpg';
+            containerColor = 'rgba(0, 0, 0, 0)';
+            textColor = '#bcffff';
+
+        } else {
+            result = {
+                pokemon: "une surprise!!!",
+                img: "cadeau.png",
+                text: "Ouvre le cadeau pour la découvrir!",
+                imageSize: "200px" // Taille spécifique de l'image,
+            };  // Cas par défaut
+            background = 'fondsurprise.jpg';
+            containerColor = 'rgba(0, 0, 0, 0)';
+            textColor = '#ffbc5c';
+        }
+        
+        
+
+        // Afficher les résultats avec la taille d'image spécifique
+        document.getElementById('pokemon-result').innerHTML = `  
+            <div><strong>Ton Agent Valorant est ${result.pokemon} </strong></div>
+            <div>${result.text}</div>
+            ${result.pokemon === "une surprise!!!" ? `<a href="https://fr.pornhub.com/view_video.php?viewkey=ph61a1aba1281ed"><img src="${result.img}" alt="${result.pokemon}" style="width: ${result.imageSize}; cursor: pointer;"></a>` : `<img src="${result.img}" alt="${result.pokemon}" style="width: ${result.imageSize}; cursor: pointer;">`}
+        `;
+
+        document.body.style.background = `url('${background}') no-repeat center center/cover`;
+        document.getElementById('container').style.background = containerColor;
+        document.getElementById('container').style.color = textColor;
+
+        // Fonction pour recommencer le quiz
+        function retryQuiz() {
+            localStorage.clear();
+            window.location.href = 'Accueil.html'; // Redirige vers la première page
+        }
+
+        const audio = document.getElementById('background-music');
+
+        document.body.addEventListener('click', function() {
+        audio.play();
+        });
+    </script>
+
+</body>
+</html>
